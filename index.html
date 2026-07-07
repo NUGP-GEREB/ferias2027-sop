@@ -4,104 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
     <title>Férias SOP - PMDF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* CSS COMPLETO (copie do último HTML que enviei) */
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family:'Roboto',sans-serif;
-            background:#f0f2f5;
+            background: linear-gradient(135deg, #e8edf2 0%, #d5dce4 100%);
             color:#1e2a3a;
-            padding:15px;
+            padding:20px;
             min-height:100vh;
         }
         .container {
             max-width:1400px;
             margin:0 auto;
-            background:#fff;
-            border-radius:16px;
-            box-shadow:0 10px 30px rgba(0,0,0,0.08);
-            padding:20px 15px;
+            background:#ffffff;
+            border-radius:24px;
+            box-shadow:0 20px 60px rgba(11,59,92,0.15);
+            padding:30px 25px;
+            transition:all 0.3s ease;
         }
         .header {
             display:flex;
             align-items:center;
             justify-content:space-between;
             flex-wrap:wrap;
-            border-bottom:3px solid #d4af37;
-            padding-bottom:15px;
-            margin-bottom:20px;
+            padding-bottom:20px;
+            margin-bottom:25px;
+            border-bottom:4px solid #d4af37;
+            background: linear-gradient(90deg, #0b3b5c 0%, #1a5276 100%);
+            margin:-30px -25px 25px -25px;
+            padding:20px 25px;
+            border-radius:24px 24px 0 0;
         }
-        .header h1 {
-            font-weight:500;
-            font-size:1.6rem;
-            color:#0b3b5c;
+        .header-left {
+            display:flex;
+            align-items:center;
+            gap:18px;
         }
-        .header h1 small {
+        .header-left .logo-pmdf {
+            width:60px;
+            height:60px;
+            border-radius:50%;
+            border:3px solid #d4af37;
+            background:#fff;
+            padding:5px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            box-shadow:0 4px 15px rgba(212,175,55,0.3);
+        }
+        .header-left .logo-pmdf img {
+            width:50px;
+            height:50px;
+            object-fit:contain;
+        }
+        .header-left .titulo h1 {
+            font-weight:900;
+            font-size:1.8rem;
+            color:#ffffff;
+            letter-spacing:1px;
+            text-shadow:0 2px 4px rgba(0,0,0,0.2);
+        }
+        .header-left .titulo h1 small {
             font-weight:300;
             font-size:0.9rem;
-            color:#5a6b7a;
+            color:#d4af37;
             display:block;
+            letter-spacing:2px;
+            text-shadow:none;
         }
-        .header .logo span {
-            background:#0b3b5c;
-            color:#fff;
-            padding:4px 12px;
+        .header-right {
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+        .header-right .badge {
+            background:rgba(212,175,55,0.2);
+            color:#d4af37;
+            padding:6px 16px;
             border-radius:30px;
             font-size:0.75rem;
-            font-weight:500;
-            margin-left:6px;
+            font-weight:700;
+            letter-spacing:1px;
+            border:1px solid rgba(212,175,55,0.3);
+        }
+        .header-right .badge i {
+            margin-right:6px;
         }
         .toolbar {
             display:flex;
             flex-wrap:wrap;
             justify-content:space-between;
             align-items:center;
-            margin-bottom:15px;
-            gap:10px;
+            margin-bottom:20px;
+            gap:12px;
+            background:#f8fafc;
+            padding:10px 18px;
+            border-radius:16px;
+            border:1px solid #e8edf2;
         }
         .toolbar .identificacao {
             display:flex;
             flex-wrap:wrap;
             align-items:center;
-            gap:6px;
-            background:#f8fafc;
-            padding:4px 10px 4px 14px;
-            border-radius:30px;
-            border:1px solid #d0d7de;
+            gap:8px;
         }
         .toolbar .identificacao label {
-            font-weight:500;
+            font-weight:600;
             font-size:0.9rem;
-            color:#2c3e50;
+            color:#0b3b5c;
+        }
+        .toolbar .identificacao label i {
+            color:#d4af37;
+            margin-right:4px;
         }
         .toolbar .identificacao input {
-            padding:5px 10px;
-            border:1px solid #d0d7de;
-            border-radius:20px;
+            padding:8px 14px;
+            border:2px solid #e2e8f0;
+            border-radius:30px;
             font-size:0.9rem;
-            width:120px;
+            width:150px;
+            transition:0.3s;
+            background:#fff;
         }
         .toolbar .identificacao input:focus {
             outline:none;
             border-color:#0b3b5c;
+            box-shadow:0 0 0 4px rgba(11,59,92,0.1);
         }
         .toolbar .identificacao button {
-            padding:5px 14px;
+            padding:8px 22px;
             border:none;
-            border-radius:20px;
-            background:#0b3b5c;
+            border-radius:30px;
+            background:linear-gradient(135deg,#0b3b5c,#1a5276);
             color:#fff;
-            font-weight:500;
+            font-weight:600;
             cursor:pointer;
             font-size:0.85rem;
+            transition:0.3s;
+            display:flex;
+            align-items:center;
+            gap:6px;
         }
-        .toolbar .identificacao button:hover { background:#092b44; }
+        .toolbar .identificacao button:hover {
+            transform:translateY(-2px);
+            box-shadow:0 6px 20px rgba(11,59,92,0.3);
+        }
         .toolbar .identificacao .usuario-atual {
-            font-weight:500;
+            font-weight:600;
             color:#0b3b5c;
             font-size:0.85rem;
-            margin-left:4px;
+            margin-left:6px;
+            background:#e8edf2;
+            padding:4px 14px;
+            border-radius:30px;
         }
         .toolbar .actions {
             display:flex;
@@ -109,238 +166,368 @@
             flex-wrap:wrap;
         }
         .toolbar .actions button {
-            padding:6px 16px;
+            padding:8px 18px;
             border:none;
             border-radius:30px;
-            font-weight:500;
+            font-weight:600;
             cursor:pointer;
-            font-size:0.85rem;
-            background:#e9edf2;
+            font-size:0.8rem;
+            transition:0.3s;
+            display:flex;
+            align-items:center;
+            gap:6px;
+            background:#e8edf2;
             color:#1e2a3a;
         }
-        .toolbar .actions button:hover { background:#d0d7de; }
-        .toolbar .actions button.admin { background:#d4af37; color:#fff; }
-        .toolbar .actions button.admin:hover { background:#c09c2e; }
-        .toolbar .actions button.danger { background:#b22222; color:#fff; }
-        .toolbar .actions button.danger:hover { background:#8b1a1a; }
+        .toolbar .actions button:hover {
+            transform:translateY(-2px);
+            box-shadow:0 4px 15px rgba(0,0,0,0.1);
+        }
+        .toolbar .actions button.admin {
+            background:linear-gradient(135deg,#d4af37,#c09c2e);
+            color:#fff;
+        }
+        .toolbar .actions button.admin:hover {
+            box-shadow:0 4px 20px rgba(212,175,55,0.4);
+        }
+        .toolbar .actions button.danger {
+            background:linear-gradient(135deg,#b22222,#8b1a1a);
+            color:#fff;
+        }
+        .toolbar .actions button.danger:hover {
+            box-shadow:0 4px 20px rgba(178,34,34,0.4);
+        }
+        .alert {
+            padding:12px 20px;
+            border-radius:12px;
+            margin:10px 0 20px;
+            display:none;
+            font-weight:500;
+            font-size:0.9rem;
+            border-left:5px solid;
+        }
+        .alert.success { background:#e6f7e6; border-left-color:#2c7a4a; color:#1a5a2a; }
+        .alert.warning { background:#fff3cd; border-left-color:#d4af37; color:#856404; }
+        .alert.error { background:#fce4e4; border-left-color:#b22222; color:#721c24; }
+        .alert.info { background:#e8f0fe; border-left-color:#0b3b5c; color:#0b3b5c; }
         .table-wrapper {
             overflow-x:auto;
-            border-radius:12px;
-            border:1px solid #e2e8f0;
+            border-radius:16px;
+            border:1px solid #e8edf2;
+            background:#fff;
         }
         table {
             width:100%;
             border-collapse:collapse;
             font-size:0.85rem;
-            min-width:900px;
+            min-width:950px;
         }
         th {
-            background:#0b3b5c;
+            background:linear-gradient(180deg,#0b3b5c,#1a5276);
             color:#fff;
-            font-weight:500;
-            padding:10px 6px;
+            font-weight:600;
+            padding:14px 8px;
             text-align:center;
             white-space:nowrap;
+            font-size:0.78rem;
+            letter-spacing:0.3px;
+        }
+        th i {
+            margin-right:4px;
+            color:#d4af37;
         }
         td {
-            padding:8px 4px;
-            border-bottom:1px solid #e2e8f0;
+            padding:10px 6px;
+            border-bottom:1px solid #f0f2f5;
             text-align:center;
             vertical-align:middle;
         }
         tr:last-child td { border-bottom:none; }
         tr:hover td { background:#f8fafc; }
-        td .nome { font-weight:500; text-align:left; }
-        td .posto { color:#0b3b5c; font-weight:500; white-space:nowrap; }
+        td .nome { font-weight:500; text-align:left; font-size:0.82rem; }
+        td .posto {
+            color:#0b3b5c;
+            font-weight:700;
+            white-space:nowrap;
+            background:#e8edf2;
+            padding:2px 10px;
+            border-radius:20px;
+            display:inline-block;
+            font-size:0.75rem;
+        }
         select {
-            padding:4px 2px;
-            border:1px solid #d0d7de;
-            border-radius:6px;
+            padding:6px 4px;
+            border:2px solid #e2e8f0;
+            border-radius:8px;
             background:#fff;
             font-size:0.8rem;
             width:100%;
             max-width:100px;
             cursor:pointer;
+            transition:0.3s;
+        }
+        select:not(:disabled):hover {
+            border-color:#0b3b5c;
         }
         select:disabled {
-            background:#f0f2f5;
-            color:#6a7a8a;
+            background:#f5f6f8;
+            color:#8a9aa8;
             cursor:not-allowed;
+            opacity:0.7;
         }
         select:focus {
             outline:none;
             border-color:#0b3b5c;
+            box-shadow:0 0 0 3px rgba(11,59,92,0.1);
         }
         .antecipacao select { max-width:85px; }
-        .alert {
-            padding:8px 14px;
-            border-radius:8px;
-            margin:8px 0;
-            background:#e8f0fe;
-            border-left:4px solid #0b3b5c;
-            color:#1e2a3a;
-            display:none;
-            font-size:0.9rem;
+        .info-antecipacao {
+            font-size:0.65rem;
+            color:#6a7a8a;
+            display:block;
+            margin-top:2px;
+            font-style:italic;
         }
-        .alert.success { background:#e6f7e6; border-left-color:#2c7a4a; }
-        .alert.warning { background:#fff3cd; border-left-color:#d4af37; }
-        .alert.error { background:#fce4e4; border-left-color:#b22222; }
-
         tr.linha-usuario {
-            background:#fff9e6 !important;
-            border-left:4px solid #d4af37;
+            background:linear-gradient(90deg,#fff9e6,#fff3c9) !important;
+            border-left:5px solid #d4af37;
         }
         tr.linha-usuario td {
-            background:#fff9e6 !important;
+            background:transparent !important;
         }
         tr.linha-usuario:hover td {
             background:#fff3c9 !important;
         }
-
         .btn-editar {
-            padding:3px 10px;
+            padding:5px 14px;
             border:none;
-            border-radius:14px;
+            border-radius:20px;
             font-size:0.7rem;
-            font-weight:500;
-            background:#0b3b5c;
+            font-weight:700;
+            background:linear-gradient(135deg,#0b3b5c,#1a5276);
             color:#fff;
             cursor:pointer;
-            transition:0.2s;
+            transition:0.3s;
             white-space:nowrap;
+            display:inline-flex;
+            align-items:center;
+            gap:4px;
         }
-        .btn-editar:hover { background:#092b44; }
+        .btn-editar:hover {
+            transform:translateY(-2px);
+            box-shadow:0 4px 15px rgba(11,59,92,0.3);
+        }
         .btn-editar:disabled {
             background:#a0b0c0;
             cursor:not-allowed;
+            transform:none;
+            box-shadow:none;
         }
         .status-linha {
             font-size:0.7rem;
-            font-weight:500;
-            color:#6a7a8a;
+            font-weight:600;
+            padding:4px 14px;
+            border-radius:20px;
+            display:inline-flex;
+            align-items:center;
+            gap:4px;
         }
-        .status-linha.bloqueado { color:#b22222; }
-        .status-linha.editavel { color:#2c7a4a; }
-
+        .status-linha.bloqueado {
+            background:#fce4e4;
+            color:#b22222;
+        }
+        .status-linha.editavel {
+            background:#e6f7e6;
+            color:#2c7a4a;
+        }
+        .status-linha.nao-identificado {
+            background:#e8edf2;
+            color:#8a9aa8;
+        }
         #adminModal {
             display:none;
             background:#fff;
-            border-radius:12px;
-            box-shadow:0 8px 30px rgba(0,0,0,0.2);
-            padding:20px 25px;
-            max-width:420px;
-            margin:15px auto;
-            border:1px solid #d4af37;
+            border-radius:20px;
+            box-shadow:0 20px 60px rgba(0,0,0,0.2);
+            padding:30px 35px;
+            max-width:450px;
+            margin:20px auto;
+            border:2px solid #d4af37;
+            position:relative;
+        }
+        #adminModal::before {
+            content:'';
+            position:absolute;
+            top:-2px;
+            left:20%;
+            right:20%;
+            height:4px;
+            background:linear-gradient(90deg,#0b3b5c,#d4af37,#0b3b5c);
+            border-radius:4px;
         }
         #adminModal h3 {
             color:#0b3b5c;
-            margin-bottom:12px;
-            font-size:1.1rem;
+            margin-bottom:16px;
+            font-size:1.2rem;
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+        #adminModal h3 i {
+            color:#d4af37;
         }
         #adminModal label {
             display:block;
-            font-weight:500;
-            font-size:0.9rem;
-            margin:8px 0 4px;
+            font-weight:600;
+            font-size:0.85rem;
+            margin:10px 0 4px;
+            color:#1e2a3a;
         }
         #adminModal input {
             width:100%;
-            padding:6px 10px;
-            border:1px solid #d0d7de;
-            border-radius:8px;
+            padding:10px 14px;
+            border:2px solid #e2e8f0;
+            border-radius:10px;
             font-size:0.95rem;
+            transition:0.3s;
+        }
+        #adminModal input:focus {
+            outline:none;
+            border-color:#0b3b5c;
         }
         #adminModal button {
             margin-top:10px;
-            padding:6px 18px;
+            padding:10px 24px;
             border:none;
             border-radius:30px;
-            background:#0b3b5c;
+            background:linear-gradient(135deg,#0b3b5c,#1a5276);
             color:#fff;
-            font-weight:500;
+            font-weight:600;
             cursor:pointer;
             font-size:0.9rem;
+            transition:0.3s;
         }
-        #adminModal button:hover { background:#092b44; }
+        #adminModal button:hover {
+            transform:translateY(-2px);
+            box-shadow:0 4px 15px rgba(11,59,92,0.3);
+        }
         #adminModal .close {
             background:#6c7a8a;
-            margin-left:8px;
         }
-        #adminModal .close:hover { background:#5a6b7a; }
+        #adminModal .close:hover {
+            background:#5a6b7a;
+        }
         #adminModal .admin-actions {
             display:flex;
             flex-wrap:wrap;
-            gap:8px;
-            margin-top:12px;
+            gap:10px;
+            margin-top:16px;
         }
         #adminModal .admin-actions button {
             flex:1;
             min-width:80px;
+            font-size:0.8rem;
+        }
+        .footer {
+            margin-top:25px;
+            text-align:center;
+            color:#8a9aa8;
+            font-size:0.75rem;
+            border-top:1px solid #e8edf2;
+            padding-top:18px;
+        }
+        .footer i {
+            color:#d4af37;
         }
         @media (max-width:768px) {
-            .header h1 { font-size:1.3rem; }
-            .header h1 small { font-size:0.7rem; }
-            th,td { padding:4px 3px; font-size:0.75rem; }
+            .header { flex-direction:column; align-items:flex-start; gap:12px; }
+            .header-left .titulo h1 { font-size:1.3rem; }
+            .header-left .logo-pmdf { width:45px; height:45px; }
+            .header-left .logo-pmdf img { width:38px; height:38px; }
+            .toolbar { flex-direction:column; align-items:stretch; }
+            .toolbar .identificacao { justify-content:center; }
+            .toolbar .identificacao input { width:100%; }
+            .toolbar .actions { justify-content:center; }
+            th,td { padding:6px 4px; font-size:0.75rem; }
             select { font-size:0.7rem; max-width:75px; }
-            .toolbar .identificacao { padding:4px 8px; }
-            .toolbar .identificacao input { width:90px; }
-            #adminModal { padding:15px; }
+            #adminModal { padding:20px; margin:10px; }
+            .container { padding:15px; }
+            .header { margin:-15px -15px 15px -15px; padding:15px; border-radius:16px 16px 0 0; }
         }
         @media (max-width:480px) {
-            table { font-size:0.65rem; min-width:700px; }
+            table { font-size:0.65rem; min-width:750px; }
             select { max-width:65px; font-size:0.65rem; }
+            .header-left .titulo h1 { font-size:1.1rem; }
+            .header-left .titulo h1 small { font-size:0.7rem; }
         }
         .loading {
             text-align:center;
-            padding:25px;
-            color:#6a7a8a;
+            padding:30px;
+            color:#8a9aa8;
+        }
+        .loading i {
+            font-size:2rem;
+            color:#d4af37;
+            margin-bottom:10px;
+            display:block;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <div>
-            <h1>🗓️ Férias SOP <small>Subchefia de Ordem Pública – PMDF</small></h1>
+        <div class="header-left">
+            <div class="logo-pmdf">
+                <img src="https://i.ibb.co/5ggZ6xCT/PMDF-Bras-o.jpg" alt="PMDF Brasão" />
+            </div>
+            <div class="titulo">
+                <h1>
+                    <i class="fas fa-calendar-alt" style="color:#d4af37;margin-right:8px;"></i>
+                    Férias SOP
+                    <small>Subchefia de Ordem Pública – Polícia Militar do DF</small>
+                </h1>
+            </div>
         </div>
-        <div class="logo">
-            <span>PMDF</span>
-            <span style="background:#d4af37;color:#0b3b5c;">SOP</span>
+        <div class="header-right">
+            <span class="badge"><i class="fas fa-shield-alt"></i> 2027</span>
+            <span class="badge" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);">
+                <i class="fas fa-users"></i> 44 Policiais
+            </span>
         </div>
     </div>
 
     <div class="toolbar">
         <div class="identificacao">
-            <label for="inputMatricula">🔑 Matrícula:</label>
+            <label for="inputMatricula"><i class="fas fa-id-card"></i> Matrícula:</label>
             <input type="text" id="inputMatricula" placeholder="Ex: 50.601/X" />
-            <button id="btnIdentificar">Identificar</button>
+            <button id="btnIdentificar"><i class="fas fa-check-circle"></i> Identificar</button>
             <span class="usuario-atual" id="usuarioAtual"></span>
         </div>
         <div class="actions">
-            <button id="btnAdmin" class="admin">🔑 Admin</button>
-            <button id="btnExportar" class="admin">📤 CSV</button>
-            <button id="btnLimpar" class="danger">🗑️ Limpar</button>
+            <button id="btnAdmin" class="admin"><i class="fas fa-crown"></i> Admin</button>
+            <button id="btnExportar" class="admin"><i class="fas fa-file-csv"></i> CSV</button>
+            <button id="btnLimpar" class="danger"><i class="fas fa-trash-alt"></i> Limpar</button>
         </div>
     </div>
 
     <div id="mensagem" class="alert"></div>
 
     <div id="adminModal">
-        <h3>🔧 Painel Administrador</h3>
-        <label for="adminSenha">Senha</label>
-        <input type="password" id="adminSenha" placeholder="Senha" />
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
-            <button id="btnDesbloquear">🔓 Desbloquear</button>
-            <button id="btnFecharAdmin" class="close">Fechar</button>
+        <h3><i class="fas fa-crown"></i> Painel Administrador</h3>
+        <label for="adminSenha"><i class="fas fa-lock"></i> Senha</label>
+        <input type="password" id="adminSenha" placeholder="Digite a senha" />
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">
+            <button id="btnDesbloquear"><i class="fas fa-unlock"></i> Desbloquear</button>
+            <button id="btnFecharAdmin" class="close"><i class="fas fa-times"></i> Fechar</button>
         </div>
-        <div id="adminMensagem" style="margin-top:6px;color:#b22222;font-weight:500;font-size:0.9rem;"></div>
-        <hr style="margin:12px 0;border-color:#e2e8f0;" />
-        <label for="adminMatriculaDesbloq">Matrícula para desbloquear</label>
+        <div id="adminMensagem" style="margin-top:8px;color:#b22222;font-weight:500;font-size:0.9rem;"></div>
+        <hr style="margin:14px 0;border-color:#e8edf2;" />
+        <label for="adminMatriculaDesbloq"><i class="fas fa-user-edit"></i> Matrícula para desbloquear</label>
         <input type="text" id="adminMatriculaDesbloq" placeholder="Digite a matrícula" />
-        <button id="btnDesbloquearExec" style="width:100%;margin-top:4px;">Desbloquear</button>
+        <button id="btnDesbloquearExec" style="width:100%;margin-top:6px;"><i class="fas fa-unlock-alt"></i> Desbloquear</button>
         <div class="admin-actions">
-            <button id="btnExportarAdmin">📤 Exportar CSV</button>
-            <button id="btnLimparAdmin" class="danger">🗑️ Limpar todos</button>
+            <button id="btnExportarAdmin"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+            <button id="btnLimparAdmin" class="danger"><i class="fas fa-trash-alt"></i> Limpar todos</button>
         </div>
     </div>
 
@@ -348,31 +535,42 @@
         <table>
             <thead>
                 <tr>
-                    <th>Posto</th>
-                    <th style="text-align:left;">Nome</th>
-                    <th>Matrícula</th>
-                    <th>Opção 1</th>
-                    <th>Opção 2</th>
-                    <th>Opção 3</th>
-                    <th>Opção 4</th>
-                    <th>Opção 5</th>
-                    <th>Opção 6</th>
-                    <th class="antecipacao">Antec. 13º</th>
-                    <th style="min-width:80px;">Ação</th>
+                    <th><i class="fas fa-user-tie"></i> Posto/Graduação</th>
+                    <th style="text-align:left;"><i class="fas fa-user"></i> Nome</th>
+                    <th><i class="fas fa-id-badge"></i> Matrícula</th>
+                    <th><i class="fas fa-1"></i> Opção 1</th>
+                    <th><i class="fas fa-2"></i> Opção 2</th>
+                    <th><i class="fas fa-3"></i> Opção 3</th>
+                    <th><i class="fas fa-4"></i> Opção 4</th>
+                    <th><i class="fas fa-5"></i> Opção 5</th>
+                    <th><i class="fas fa-6"></i> Opção 6</th>
+                    <th class="antecipacao">
+                        <i class="fas fa-coins"></i> Antecipação 13º Salário
+                        <span class="info-antecipacao" style="color:#d4af37;font-size:0.55rem;display:block;font-weight:300;">
+                            <i class="fas fa-info-circle"></i> Apenas para férias no 1º semestre (jan-jun)
+                        </span>
+                    </th>
+                    <th style="min-width:90px;"><i class="fas fa-tasks"></i> Status</th>
                 </tr>
             </thead>
             <tbody id="tabelaCorpo">
-                <tr><td colspan="11" class="loading">Carregando...</td></tr>
+                <tr><td colspan="11" class="loading"><i class="fas fa-spinner fa-spin"></i> Carregando dados...</td></tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-shield-alt"></i> Polícia Militar do Distrito Federal – Subchefia de Ordem Pública
+        <span style="margin:0 10px;">•</span> <i class="fas fa-calendar-check"></i> Férias 2027
+        <span style="margin:0 10px;">•</span> <i class="fas fa-info-circle"></i> Antecipação do 13º apenas para férias no 1º semestre
     </div>
 </div>
 
 <script>
     // ================================================================
-    // 1. CONFIGURAÇÃO – URL DO APPS SCRIPT
+    // 1. CONFIGURAÇÃO - URL DO APPS SCRIPT
     // ================================================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycby1VgBpzCxSR6WucRYrgtM0B2YyxF4-XH47aQu7P_sP1sor-7uqA_oG32Xqqtl667nrKg/exec'; // <-- COLE A URL DO SEU APPS SCRIPT
+    const API_URL = 'https://script.google.com/macros/s/AKfycby1VgbPzCxSR6WucRYrgtM0B2YyxF4-XH47aQu7P_sP1sor-7uqA_oG32Xqqtl667nrKg/exec';
 
     // ================================================================
     // 2. LISTA COMPLETA DOS 44 POLICIAIS
@@ -485,7 +683,6 @@
             renderizarTabela();
         } catch (err) {
             mostrarMensagem('Erro ao carregar dados: ' + err.message, 'error');
-            // Fallback para dados locais
             POLICIAIS.forEach(p => {
                 if (!dadosLocais[p.matricula]) {
                     dadosLocais[p.matricula] = { opcoes: ['','','','','',''], antecipacao: '', bloqueado: false };
@@ -510,13 +707,12 @@
             antecipacao: dados.antecipacao || '',
             bloqueado: dados.bloqueado ? 'TRUE' : 'FALSE'
         };
-        const resp = await fetch(API_URL, {
+        await fetch(API_URL, {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
-        // no-cors não retorna resposta, mas a requisição é enviada.
         return true;
     }
 
@@ -559,9 +755,9 @@
             const classeLinha = isUsuario ? 'linha-usuario' : '';
 
             html += <tr class="${classeLinha}" data-matricula="${p.matricula}">;
-            html += <td class="posto">${p.posto}</td>;
+            html += <td><span class="posto">${p.posto}</span></td>;
             html += <td class="nome">${p.nome}</td>;
-            html += <td>${p.matricula}</td>;
+            html += <td><strong>${p.matricula}</strong></td>;
 
             for (let i = 0; i < 6; i++) {
                 const val = opcoes[i] || '';
@@ -579,26 +775,30 @@
                             <option value="sim" ${antecipacao === 'sim' ? 'selected' : ''}>Sim</option>
                             <option value="nao" ${antecipacao === 'nao' ? 'selected' : ''}>Não</option>
                         </select>`;
+                html += <span class="info-antecipacao"><i class="fas fa-info-circle"></i> Somente 1º semestre</span>;
             } else {
-                html += <span style="color:#6a7a8a;font-size:0.75rem;">—</span>;
+                html += <span style="color:#8a9aa8;font-size:0.75rem;">—</span>;
+                html += <span class="info-antecipacao"><i class="fas fa-info-circle"></i> Nenhuma opção no 1º semestre</span>;
             }
             html += </td>;
 
             html += <td>;
             if (isUsuario) {
                 if (bloqueado) {
-                    html += <span class="status-linha bloqueado">🔒 Bloqueado</span>;
+                    html += <span class="status-linha bloqueado"><i class="fas fa-lock"></i> Bloqueado</span>;
                 } else {
                     const hasSelection = opcoes.some(o => o !== '');
-                    html += <button class="btn-editar" data-acao="salvar" data-matricula="${p.matricula}">;
-                    html += hasSelection ? '💾 Salvar' : '📝 Editar';
-                    html += </button>;
+                    html += `<button class="btn-editar" data-acao="salvar" data-matricula="${p.matricula}">
+                                <i class="fas ${hasSelection ? 'fa-save' : 'fa-edit'}"></i>
+                                ${hasSelection ? 'Salvar' : 'Editar'}
+                            </button>`;
+                    html += <span class="info-antecipacao" style="margin-top:4px;">Clique para salvar suas opções</span>;
                 }
             } else {
                 if (usuarioMatricula === null) {
-                    html += <span class="status-linha">—</span>;
+                    html += <span class="status-linha nao-identificado"><i class="fas fa-user-slash"></i> Não identificado</span>;
                 } else {
-                    html += <span class="status-linha">🔒</span>;
+                    html += <span class="status-linha nao-identificado"><i class="fas fa-lock"></i> Não editável</span>;
                 }
             }
             html += </td>;
@@ -627,7 +827,7 @@
     }
 
     // ================================================================
-    // 6. SALVAR E BLOQUEAR (com envio para a API)
+    // 6. SALVAR E BLOQUEAR
     // ================================================================
     async function salvarEBloquear(matricula) {
         if (!confirm(Tem certeza que deseja salvar e bloquear as férias para a matrícula ${matricula}?)) {
@@ -656,62 +856,42 @@
             bloqueado: true
         };
 
-        // Atualiza localmente
         dadosLocais[matricula] = dados;
 
-        // Envia para a planilha
         try {
             await salvarNaAPI(matricula, dados);
-            mostrarMensagem(Férias salvas e bloqueadas para ${matricula}. Dados enviados para a planilha central., 'success');
-            // Recarrega os dados da API para sincronizar
+            mostrarMensagem(✅ Férias salvas e bloqueadas para ${matricula}., 'success');
             await carregarDaAPI();
         } catch (err) {
-            mostrarMensagem('Erro ao enviar para a planilha: ' + err.message + '. Dados salvos apenas localmente.', 'error');
-            // Mantém localmente
-            salvarDadosLocalmente();
+            mostrarMensagem('❌ Erro ao enviar para a planilha: ' + err.message, 'error');
             renderizarTabela();
         }
     }
 
     // ================================================================
-    // 7. FUNÇÕES DE FALLBACK LOCAL (caso a API falhe)
-    // ================================================================
-    function salvarDadosLocalmente() {
-        localStorage.setItem('feriasSOP_fallback', JSON.stringify(dadosLocais));
-    }
-
-    function carregarDadosLocais() {
-        const stored = localStorage.getItem('feriasSOP_fallback');
-        if (stored) {
-            try { dadosLocais = JSON.parse(stored); } catch(e) {}
-        }
-    }
-
-    // ================================================================
-    // 8. ADMIN: DESBLOQUEAR (também envia para API)
+    // 7. ADMIN: DESBLOQUEAR
     // ================================================================
     async function desbloquearLinha(matricula) {
         if (!dadosLocais[matricula]) {
-            adminMensagem.textContent = 'Matrícula não encontrada.';
+            adminMensagem.textContent = '❌ Matrícula não encontrada.';
             adminMensagem.style.color = '#b22222';
             return;
         }
         dadosLocais[matricula].bloqueado = false;
         try {
             await salvarNaAPI(matricula, dadosLocais[matricula]);
-            adminMensagem.textContent = Linha ${matricula} desbloqueada com sucesso!;
+            adminMensagem.textContent = ✅ Linha ${matricula} desbloqueada com sucesso!;
             adminMensagem.style.color = '#2c7a4a';
             await carregarDaAPI();
         } catch (err) {
-            adminMensagem.textContent = 'Erro ao desbloquear: ' + err.message;
+            adminMensagem.textContent = '❌ Erro ao desbloquear: ' + err.message;
             adminMensagem.style.color = '#b22222';
-            salvarDadosLocalmente();
             renderizarTabela();
         }
     }
 
     // ================================================================
-    // 9. EXPORTAR CSV
+    // 8. EXPORTAR CSV
     // ================================================================
     function exportarCSV() {
         let csv = 'Posto/Grad,Nome,Matrícula,Opção1,Opção2,Opção3,Opção4,Opção5,Opção6,Antecipação 13º,Bloqueado\n';
@@ -735,14 +915,14 @@
         link.download = 'ferias_sop.csv';
         link.click();
         URL.revokeObjectURL(link.href);
-        mostrarMensagem('CSV exportado com sucesso!', 'success');
+        mostrarMensagem('📤 CSV exportado com sucesso!', 'success');
     }
 
     // ================================================================
-    // 10. LIMPAR DADOS (envia para API)
+    // 9. LIMPAR DADOS
     // ================================================================
     async function limparTodosDados() {
-        if (!confirm('Tem certeza? Isso apagará TODAS as escolhas de férias.')) return;
+        if (!confirm('⚠️ Tem certeza? Isso apagará TODAS as escolhas de férias.')) return;
         for (const p of POLICIAIS) {
             const dados = {
                 opcoes: ['','','','','',''],
@@ -753,11 +933,11 @@
             await salvarNaAPI(p.matricula, dados);
         }
         await carregarDaAPI();
-        mostrarMensagem('Todos os dados foram limpos.', 'warning');
+        mostrarMensagem('🗑️ Todos os dados foram limpos.', 'warning');
     }
 
     // ================================================================
-    // 11. MENSAGENS E AUTENTICAÇÃO ADMIN
+    // 10. MENSAGENS E AUTENTICAÇÃO ADMIN
     // ================================================================
     function mostrarMensagem(texto, tipo = 'info') {
         mensagemDiv.textContent = texto;
@@ -765,7 +945,7 @@
         mensagemDiv.style.display = 'block';
         setTimeout(() => {
             mensagemDiv.style.display = 'none';
-        }, 5000);
+        }, 6000);
     }
 
     function autenticarAdmin(senha) {
@@ -776,24 +956,24 @@
             adminSenha.value = '';
             return true;
         } else {
-            adminMensagem.textContent = 'Senha incorreta.';
+            adminMensagem.textContent = '❌ Senha incorreta.';
             adminMensagem.style.color = '#b22222';
             return false;
         }
     }
 
     // ================================================================
-    // 12. EVENTOS
+    // 11. EVENTOS
     // ================================================================
     function identificarUsuario() {
         const mat = inputMatricula.value.trim();
         if (!mat) {
-            mostrarMensagem('Digite uma matrícula.', 'error');
+            mostrarMensagem('⚠️ Digite uma matrícula.', 'error');
             return;
         }
         const existe = POLICIAIS.some(p => p.matricula === mat);
         if (!existe) {
-            mostrarMensagem('Matrícula não encontrada.', 'error');
+            mostrarMensagem('❌ Matrícula não encontrada.', 'error');
             usuarioMatricula = null;
             sessionStorage.removeItem('usuarioMatriculaSOP');
             renderizarTabela();
@@ -802,7 +982,7 @@
         usuarioMatricula = mat;
         sessionStorage.setItem('usuarioMatriculaSOP', mat);
         renderizarTabela();
-        mostrarMensagem(Identificado como matrícula ${mat}., 'success');
+        mostrarMensagem(✅ Identificado como matrícula ${mat}., 'success');
         inputMatricula.value = '';
     }
 
@@ -818,12 +998,12 @@
             if (modoAdmin) {
                 adminModal.style.display = 'block';
             } else {
-                const senha = prompt('Digite a senha de administrador:');
+                const senha = prompt('🔑 Digite a senha de administrador:');
                 if (senha !== null) {
                     if (autenticarAdmin(senha)) {
                         adminModal.style.display = 'block';
                     } else {
-                        alert('Senha incorreta.');
+                        alert('❌ Senha incorreta.');
                     }
                 }
             }
@@ -839,12 +1019,12 @@
     btnDesbloquearExec.addEventListener('click', async function() {
         const mat = adminMatriculaDesbloq.value.trim();
         if (!mat) {
-            adminMensagem.textContent = 'Digite uma matrícula.';
+            adminMensagem.textContent = '⚠️ Digite uma matrícula.';
             adminMensagem.style.color = '#b22222';
             return;
         }
         if (!modoAdmin) {
-            adminMensagem.textContent = 'Autentique-se como admin primeiro.';
+            adminMensagem.textContent = '❌ Autentique-se como admin primeiro.';
             adminMensagem.style.color = '#b22222';
             return;
         }
@@ -862,15 +1042,10 @@
     btnLimparAdmin.addEventListener('click', limparTodosDados);
 
     // ================================================================
-    // 13. INICIALIZAÇÃO
+    // 12. INICIALIZAÇÃO
     // ================================================================
-    // Primeiro, tenta carregar da API
     carregarDaAPI();
 
-    // Se falhar, usa fallback local
-    carregarDadosLocais();
-
-    // Restaurar sessão
     const sessao = sessionStorage.getItem('usuarioMatriculaSOP');
     if (sessao) {
         const mat = sessao;
@@ -880,7 +1055,7 @@
         }
     }
 
-    console.log('Painel SOP/PMDF com integração com planilha central.');
+    console.log('✅ Painel SOP/PMDF carregado com sucesso!');
 </script>
 </body>
 </html>
