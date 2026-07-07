@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Férias SOP - PMDF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS COMPLETO (copie do último HTML que enviei) */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family:'Roboto',sans-serif;
+            background:#f0f2f5;
+            color:#1e2a3a;
+            padding:15px;
+            min-height:100vh;
+        }
+        .container {
+            max-width:1400px;
+            margin:0 auto;
+            background:#fff;
+            border-radius:16px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            padding:20px 15px;
+        }
+        .header {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            flex-wrap:wrap;
+            border-bottom:3px solid #d4af37;
+            padding-bottom:15px;
+            margin-bottom:20px;
+        }
+        .header h1 {
+            font-weight:500;
+            font-size:1.6rem;
+            color:#0b3b5c;
+        }
+        .header h1 small {
+            font-weight:300;
+            font-size:0.9rem;
+            color:#5a6b7a;
+            display:block;
+        }
+        .header .logo span {
+            background:#0b3b5c;
+            color:#fff;
+            padding:4px 12px;
+            border-radius:30px;
+            font-size:0.75rem;
+            font-weight:500;
+            margin-left:6px;
+        }
+        .toolbar {
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:15px;
+            gap:10px;
+        }
+        .toolbar .identificacao {
+            display:flex;
+            flex-wrap:wrap;
+            align-items:center;
+            gap:6px;
+            background:#f8fafc;
+            padding:4px 10px 4px 14px;
+            border-radius:30px;
+            border:1px solid #d0d7de;
+        }
+        .toolbar .identificacao label {
+            font-weight:500;
+            font-size:0.9rem;
+            color:#2c3e50;
+        }
+        .toolbar .identificacao input {
+            padding:5px 10px;
+            border:1px solid #d0d7de;
+            border-radius:20px;
+            font-size:0.9rem;
+            width:120px;
+        }
+        .toolbar .identificacao input:focus {
+            outline:none;
+            border-color:#0b3b5c;
+        }
+        .toolbar .identificacao button {
+            padding:5px 14px;
+            border:none;
+            border-radius:20px;
+            background:#0b3b5c;
+            color:#fff;
+            font-weight:500;
+            cursor:pointer;
+            font-size:0.85rem;
+        }
+        .toolbar .identificacao button:hover { background:#092b44; }
+        .toolbar .identificacao .usuario-atual {
+            font-weight:500;
+            color:#0b3b5c;
+            font-size:0.85rem;
+            margin-left:4px;
+        }
+        .toolbar .actions {
+            display:flex;
+            gap:8px;
+            flex-wrap:wrap;
+        }
+        .toolbar .actions button {
+            padding:6px 16px;
+            border:none;
+            border-radius:30px;
+            font-weight:500;
+            cursor:pointer;
+            font-size:0.85rem;
+            background:#e9edf2;
+            color:#1e2a3a;
+        }
+        .toolbar .actions button:hover { background:#d0d7de; }
+        .toolbar .actions button.admin { background:#d4af37; color:#fff; }
+        .toolbar .actions button.admin:hover { background:#c09c2e; }
+        .toolbar .actions button.danger { background:#b22222; color:#fff; }
+        .toolbar .actions button.danger:hover { background:#8b1a1a; }
+        .table-wrapper {
+            overflow-x:auto;
+            border-radius:12px;
+            border:1px solid #e2e8f0;
+        }
+        table {
+            width:100%;
+            border-collapse:collapse;
+            font-size:0.85rem;
+            min-width:900px;
+        }
+        th {
+            background:#0b3b5c;
+            color:#fff;
+            font-weight:500;
+            padding:10px 6px;
+            text-align:center;
+            white-space:nowrap;
+        }
+        td {
+            padding:8px 4px;
+            border-bottom:1px solid #e2e8f0;
+            text-align:center;
+            vertical-align:middle;
+        }
+        tr:last-child td { border-bottom:none; }
+        tr:hover td { background:#f8fafc; }
+        td .nome { font-weight:500; text-align:left; }
+        td .posto { color:#0b3b5c; font-weight:500; white-space:nowrap; }
+        select {
+            padding:4px 2px;
+            border:1px solid #d0d7de;
+            border-radius:6px;
+            background:#fff;
+            font-size:0.8rem;
+            width:100%;
+            max-width:100px;
+            cursor:pointer;
+        }
+        select:disabled {
+            background:#f0f2f5;
+            color:#6a7a8a;
+            cursor:not-allowed;
+        }
+        select:focus {
+            outline:none;
+            border-color:#0b3b5c;
+        }
+        .antecipacao select { max-width:85px; }
+        .alert {
+            padding:8px 14px;
+            border-radius:8px;
+            margin:8px 0;
+            background:#e8f0fe;
+            border-left:4px solid #0b3b5c;
+            color:#1e2a3a;
+            display:none;
+            font-size:0.9rem;
+        }
+        .alert.success { background:#e6f7e6; border-left-color:#2c7a4a; }
+        .alert.warning { background:#fff3cd; border-left-color:#d4af37; }
+        .alert.error { background:#fce4e4; border-left-color:#b22222; }
+
+        tr.linha-usuario {
+            background:#fff9e6 !important;
+            border-left:4px solid #d4af37;
+        }
+        tr.linha-usuario td {
+            background:#fff9e6 !important;
+        }
+        tr.linha-usuario:hover td {
+            background:#fff3c9 !important;
+        }
+
+        .btn-editar {
+            padding:3px 10px;
+            border:none;
+            border-radius:14px;
+            font-size:0.7rem;
+            font-weight:500;
+            background:#0b3b5c;
+            color:#fff;
+            cursor:pointer;
+            transition:0.2s;
+            white-space:nowrap;
+        }
+        .btn-editar:hover { background:#092b44; }
+        .btn-editar:disabled {
+            background:#a0b0c0;
+            cursor:not-allowed;
+        }
+        .status-linha {
+            font-size:0.7rem;
+            font-weight:500;
+            color:#6a7a8a;
+        }
+        .status-linha.bloqueado { color:#b22222; }
+        .status-linha.editavel { color:#2c7a4a; }
+
+        #adminModal {
+            display:none;
+            background:#fff;
+            border-radius:12px;
+            box-shadow:0 8px 30px rgba(0,0,0,0.2);
+            padding:20px 25px;
+            max-width:420px;
+            margin:15px auto;
+            border:1px solid #d4af37;
+        }
+        #adminModal h3 {
+            color:#0b3b5c;
+            margin-bottom:12px;
+            font-size:1.1rem;
+        }
+        #adminModal label {
+            display:block;
+            font-weight:500;
+            font-size:0.9rem;
+            margin:8px 0 4px;
+        }
+        #adminModal input {
+            width:100%;
+            padding:6px 10px;
+            border:1px solid #d0d7de;
+            border-radius:8px;
+            font-size:0.95rem;
+        }
+        #adminModal button {
+            margin-top:10px;
+            padding:6px 18px;
+            border:none;
+            border-radius:30px;
+            background:#0b3b5c;
+            color:#fff;
+            font-weight:500;
+            cursor:pointer;
+            font-size:0.9rem;
+        }
+        #adminModal button:hover { background:#092b44; }
+        #adminModal .close {
+            background:#6c7a8a;
+            margin-left:8px;
+        }
+        #adminModal .close:hover { background:#5a6b7a; }
+        #adminModal .admin-actions {
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:12px;
+        }
+        #adminModal .admin-actions button {
+            flex:1;
+            min-width:80px;
+        }
+        @media (max-width:768px) {
+            .header h1 { font-size:1.3rem; }
+            .header h1 small { font-size:0.7rem; }
+            th,td { padding:4px 3px; font-size:0.75rem; }
+            select { font-size:0.7rem; max-width:75px; }
+            .toolbar .identificacao { padding:4px 8px; }
+            .toolbar .identificacao input { width:90px; }
+            #adminModal { padding:15px; }
+        }
+        @media (max-width:480px) {
+            table { font-size:0.65rem; min-width:700px; }
+            select { max-width:65px; font-size:0.65rem; }
+        }
+        .loading {
+            text-align:center;
+            padding:25px;
+            color:#6a7a8a;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div>
+            <h1>🗓️ Férias SOP <small>Subchefia de Ordem Pública – PMDF</small></h1>
+        </div>
+        <div class="logo">
+            <span>PMDF</span>
+            <span style="background:#d4af37;color:#0b3b5c;">SOP</span>
+        </div>
+    </div>
+
+    <div class="toolbar">
+        <div class="identificacao">
+            <label for="inputMatricula">🔑 Matrícula:</label>
+            <input type="text" id="inputMatricula" placeholder="Ex: 50.601/X" />
+            <button id="btnIdentificar">Identificar</button>
+            <span class="usuario-atual" id="usuarioAtual"></span>
+        </div>
+        <div class="actions">
+            <button id="btnAdmin" class="admin">🔑 Admin</button>
+            <button id="btnExportar" class="admin">📤 CSV</button>
+            <button id="btnLimpar" class="danger">🗑️ Limpar</button>
+        </div>
+    </div>
+
+    <div id="mensagem" class="alert"></div>
+
+    <div id="adminModal">
+        <h3>🔧 Painel Administrador</h3>
+        <label for="adminSenha">Senha</label>
+        <input type="password" id="adminSenha" placeholder="Senha" />
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
+            <button id="btnDesbloquear">🔓 Desbloquear</button>
+            <button id="btnFecharAdmin" class="close">Fechar</button>
+        </div>
+        <div id="adminMensagem" style="margin-top:6px;color:#b22222;font-weight:500;font-size:0.9rem;"></div>
+        <hr style="margin:12px 0;border-color:#e2e8f0;" />
+        <label for="adminMatriculaDesbloq">Matrícula para desbloquear</label>
+        <input type="text" id="adminMatriculaDesbloq" placeholder="Digite a matrícula" />
+        <button id="btnDesbloquearExec" style="width:100%;margin-top:4px;">Desbloquear</button>
+        <div class="admin-actions">
+            <button id="btnExportarAdmin">📤 Exportar CSV</button>
+            <button id="btnLimparAdmin" class="danger">🗑️ Limpar todos</button>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Posto</th>
+                    <th style="text-align:left;">Nome</th>
+                    <th>Matrícula</th>
+                    <th>Opção 1</th>
+                    <th>Opção 2</th>
+                    <th>Opção 3</th>
+                    <th>Opção 4</th>
+                    <th>Opção 5</th>
+                    <th>Opção 6</th>
+                    <th class="antecipacao">Antec. 13º</th>
+                    <th style="min-width:80px;">Ação</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaCorpo">
+                <tr><td colspan="11" class="loading">Carregando...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // ================================================================
+    // 1. CONFIGURAÇÃO – URL DO APPS SCRIPT
+    // ================================================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycby1VgBpzCxSR6WucRYrgtM0B2YyxF4-XH47aQu7P_sP1sor-7uqA_oG32Xqqtl667nrKg/exec'; // <-- COLE A URL DO SEU APPS SCRIPT
+
+    // ================================================================
+    // 2. LISTA COMPLETA DOS 44 POLICIAIS
+    // ================================================================
+    const POLICIAIS = [
+        { matricula: "50.601/X", posto: "CEL", nome: "FABRÍCIO XAVIER LUSTOSA MASCARENHAS" },
+        { matricula: "50.862/4", posto: "TC", nome: "GLEISON BEZERRA DE LIMA" },
+        { matricula: "23.890/2", posto: "MAJ", nome: "REGILSON GOMES DA SILVA" },
+        { matricula: "73.103/X", posto: "MAJ", nome: "MARIO VITOR BARBOSA MAGALHAES" },
+        { matricula: "81.182/3", posto: "MAJ", nome: "CARLOS ROBERTO MOREIRA FILHO" },
+        { matricula: "23.143/6", posto: "CAP", nome: "ADILSON ARAUJO LIMA" },
+        { matricula: "23.933/X", posto: "ST", nome: "RICARDO SALDANHA GUEDES" },
+        { matricula: "22.007/8", posto: "1º SGT", nome: "CLEUBER CANDIDO DA SILVA" },
+        { matricula: "22.053/1", posto: "1º SGT", nome: "GILMARIO CORCINO PEIXOTO" },
+        { matricula: "22.723/4", posto: "1º SGT", nome: "LUIZ GEORGE GOMES LIMA" },
+        { matricula: "22.645/9", posto: "1º SGT", nome: "CARLOS HENRIQUE PACIFICO SILVA LIMA" },
+        { matricula: "23.673/X", posto: "1º SGT", nome: "HELTON CESAR RODRIGUES DE VASCONCELOS" },
+        { matricula: "24.151/2", posto: "1º SGT", nome: "JOAO HENRIQUE PEREIRA COTRIM" },
+        { matricula: "24.157/1", posto: "1º SGT", nome: "JOSE OTAVIO DE MOURA TELES" },
+        { matricula: "72.697/4", posto: "1º SGT", nome: "ANELIO BELCHIOR GUIMARAES" },
+        { matricula: "74.310/0", posto: "1º SGT", nome: "FABRICIO AYRES SIQUEIRA" },
+        { matricula: "74.244/9", posto: "1º SGT", nome: "WESLEI CRISTIAN ARAUJO VIEIRA MOURA" },
+        { matricula: "74.225/2", posto: "2º SGT", nome: "ALEX FERREIRA DE OLIVEIRA" },
+        { matricula: "74.373/9", posto: "2º SGT", nome: "ANA CAROLINA LOPES LEITE BORGES" },
+        { matricula: "196.029/6", posto: "2º SGT", nome: "MARCELO GURGEL DA SILVA" },
+        { matricula: "195.942/5", posto: "2º SGT", nome: "CAYO HENRIQUE FERREIRA SANTORO" },
+        { matricula: "196.709/6", posto: "2º SGT", nome: "RONEY ARAUJO SILVA JUNIOR" },
+        { matricula: "199.904/4", posto: "2º SGT", nome: "GENILDO VALENTIM MARTINS" },
+        { matricula: "199.893/5", posto: "2º SGT", nome: "FRANCISCO HOLANDA CELESTINO JUNIOR" },
+        { matricula: "216.131/1", posto: "2º SGT", nome: "ALAN DE LIMA FARIA" },
+        { matricula: "215.958/9", posto: "2º SGT", nome: "ANDERSON PEREIRA DA SILVA" },
+        { matricula: "215.603/2", posto: "2º SGT", nome: "DIEGO AIRES DE LIMA" },
+        { matricula: "215.199/5", posto: "2º SGT", nome: "ROBERTO TAVARES MENDONCA" },
+        { matricula: "215.642/3", posto: "2º SGT", nome: "JOAO TEODOZIO DA SILVA" },
+        { matricula: "215.019/0", posto: "2º SGT", nome: "MARCIO DE SOUZA LOPES" },
+        { matricula: "731.495/7", posto: "2º SGT", nome: "DIOVANE ALVES DA SILVA" },
+        { matricula: "731.566/X", posto: "2º SGT", nome: "RONAN ARAUJO DE ALCANTARA" },
+        { matricula: "732.156/2", posto: "2º SGT", nome: "FELIPE ARAUJO XIMENES" },
+        { matricula: "732.301/8", posto: "2º SGT", nome: "SILVIO ESTEVES COUTINHO JUNIOR" },
+        { matricula: "731.393/4", posto: "2º SGT", nome: "ADRIANA FONSÊCA SOUSA" },
+        { matricula: "733.138/X", posto: "3º SGT", nome: "ETERNO TOMAZ BORGES SOBRINHO" },
+        { matricula: "732.786/2", posto: "3º SGT", nome: "FELIPE CESAR DE SOUZA DE RIBEIRO" },
+        { matricula: "732.853/2", posto: "3º SGT", nome: "ARTHUR SOUZA NAGASAVA" },
+        { matricula: "733.075/8", posto: "3º SGT", nome: "THIAGO BELISARIO DOS SANTOS" },
+        { matricula: "732.579/7", posto: "3º SGT", nome: "FABIO SAMPAIO RODRIGUES" },
+        { matricula: "732.803/6", posto: "3º SGT", nome: "MICAEL LUIZ FERREIRA VINHAL" },
+        { matricula: "732.878/8", posto: "3º SGT", nome: "ECIO SOUZA DE ALBUQUERQUE" },
+        { matricula: "732.578/9", posto: "3º SGT", nome: "ALLAN MONTENEGRO DOS SANTOS" },
+        { matricula: "735.468/1", posto: "CB", nome: "JOAO FILLIPE CIPRIANO JACINTO" }
+    ];
+
+    const SENHA_ADMIN = "admin2026";
+    const meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+    // ================================================================
+    // 3. ESTADO E REFERÊNCIAS DOM
+    // ================================================================
+    let dadosLocais = {};
+    let usuarioMatricula = null;
+    let modoAdmin = false;
+
+    const inputMatricula = document.getElementById('inputMatricula');
+    const btnIdentificar = document.getElementById('btnIdentificar');
+    const usuarioAtual = document.getElementById('usuarioAtual');
+    const tabelaCorpo = document.getElementById('tabelaCorpo');
+    const mensagemDiv = document.getElementById('mensagem');
+    const btnAdmin = document.getElementById('btnAdmin');
+    const adminModal = document.getElementById('adminModal');
+    const adminSenha = document.getElementById('adminSenha');
+    const adminMensagem = document.getElementById('adminMensagem');
+    const btnDesbloquear = document.getElementById('btnDesbloquear');
+    const btnFecharAdmin = document.getElementById('btnFecharAdmin');
+    const adminMatriculaDesbloq = document.getElementById('adminMatriculaDesbloq');
+    const btnDesbloquearExec = document.getElementById('btnDesbloquearExec');
+    const btnExportar = document.getElementById('btnExportar');
+    const btnLimpar = document.getElementById('btnLimpar');
+    const btnExportarAdmin = document.getElementById('btnExportarAdmin');
+    const btnLimparAdmin = document.getElementById('btnLimparAdmin');
+
+    // ================================================================
+    // 4. FUNÇÕES DE API
+    // ================================================================
+    async function carregarDaAPI() {
+        try {
+            const resp = await fetch(API_URL + '?acao=ler');
+            if (!resp.ok) throw new Error('Erro ao buscar dados');
+            const data = await resp.json();
+            dadosLocais = {};
+            data.forEach(row => {
+                const mat = row.matricula;
+                if (!mat) return;
+                dadosLocais[mat] = {
+                    opcoes: [
+                        row.opcao1 || '',
+                        row.opcao2 || '',
+                        row.opcao3 || '',
+                        row.opcao4 || '',
+                        row.opcao5 || '',
+                        row.opcao6 || ''
+                    ],
+                    antecipacao: row.antecipacao || '',
+                    bloqueado: row.bloqueado === 'TRUE' || row.bloqueado === true
+                };
+            });
+            POLICIAIS.forEach(p => {
+                if (!dadosLocais[p.matricula]) {
+                    dadosLocais[p.matricula] = { opcoes: ['','','','','',''], antecipacao: '', bloqueado: false };
+                }
+            });
+            renderizarTabela();
+        } catch (err) {
+            mostrarMensagem('Erro ao carregar dados: ' + err.message, 'error');
+            // Fallback para dados locais
+            POLICIAIS.forEach(p => {
+                if (!dadosLocais[p.matricula]) {
+                    dadosLocais[p.matricula] = { opcoes: ['','','','','',''], antecipacao: '', bloqueado: false };
+                }
+            });
+            renderizarTabela();
+        }
+    }
+
+    async function salvarNaAPI(matricula, dados) {
+        const payload = {
+            acao: 'salvar',
+            matricula: matricula,
+            posto: POLICIAIS.find(p => p.matricula === matricula)?.posto || '',
+            nome: POLICIAIS.find(p => p.matricula === matricula)?.nome || '',
+            opcao1: dados.opcoes[0] || '',
+            opcao2: dados.opcoes[1] || '',
+            opcao3: dados.opcoes[2] || '',
+            opcao4: dados.opcoes[3] || '',
+            opcao5: dados.opcoes[4] || '',
+            opcao6: dados.opcoes[5] || '',
+            antecipacao: dados.antecipacao || '',
+            bloqueado: dados.bloqueado ? 'TRUE' : 'FALSE'
+        };
+        const resp = await fetch(API_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        // no-cors não retorna resposta, mas a requisição é enviada.
+        return true;
+    }
+
+    // ================================================================
+    // 5. RENDERIZAÇÃO
+    // ================================================================
+    function getSelectOptions(selected) {
+        let html = '<option value="">Selecione</option>';
+        meses.forEach(m => {
+            const sel = (m === selected) ? 'selected' : '';
+            html += <option value="${m}" ${sel}>${m}</option>;
+        });
+        return html;
+    }
+
+    function isPrimeiroSemestre(mes) {
+        if (!mes) return false;
+        const idx = meses.indexOf(mes);
+        return idx >= 0 && idx < 6;
+    }
+
+    function temOpcaoPrimeiroSemestre(opcoes) {
+        if (!opcoes) return false;
+        return opcoes.some(m => isPrimeiroSemestre(m));
+    }
+
+    function renderizarTabela() {
+        let html = '';
+        POLICIAIS.forEach(p => {
+            const dados = dadosLocais[p.matricula] || { opcoes: ['','','','','',''], antecipacao: '', bloqueado: false };
+            const opcoes = dados.opcoes || [];
+            while (opcoes.length < 6) opcoes.push('');
+            const antecipacao = dados.antecipacao || '';
+            const showAntecipacao = temOpcaoPrimeiroSemestre(opcoes);
+            const bloqueado = dados.bloqueado === true;
+
+            const isUsuario = (usuarioMatricula === p.matricula);
+            const podeEditar = isUsuario && !bloqueado && usuarioMatricula !== null;
+
+            const classeLinha = isUsuario ? 'linha-usuario' : '';
+
+            html += <tr class="${classeLinha}" data-matricula="${p.matricula}">;
+            html += <td class="posto">${p.posto}</td>;
+            html += <td class="nome">${p.nome}</td>;
+            html += <td>${p.matricula}</td>;
+
+            for (let i = 0; i < 6; i++) {
+                const val = opcoes[i] || '';
+                const disabled = !podeEditar ? 'disabled' : '';
+                html += `<td><select data-matricula="${p.matricula}" data-opcao="${i}" ${disabled}>
+                            ${getSelectOptions(val)}
+                        </select></td>`;
+            }
+
+            html += <td class="antecipacao">;
+            if (showAntecipacao) {
+                const disabled = !podeEditar ? 'disabled' : '';
+                html += `<select data-matricula="${p.matricula}" data-campo="antecipacao" ${disabled}>
+                            <option value="">Selecione</option>
+                            <option value="sim" ${antecipacao === 'sim' ? 'selected' : ''}>Sim</option>
+                            <option value="nao" ${antecipacao === 'nao' ? 'selected' : ''}>Não</option>
+                        </select>`;
+            } else {
+                html += <span style="color:#6a7a8a;font-size:0.75rem;">—</span>;
+            }
+            html += </td>;
+
+            html += <td>;
+            if (isUsuario) {
+                if (bloqueado) {
+                    html += <span class="status-linha bloqueado">🔒 Bloqueado</span>;
+                } else {
+                    const hasSelection = opcoes.some(o => o !== '');
+                    html += <button class="btn-editar" data-acao="salvar" data-matricula="${p.matricula}">;
+                    html += hasSelection ? '💾 Salvar' : '📝 Editar';
+                    html += </button>;
+                }
+            } else {
+                if (usuarioMatricula === null) {
+                    html += <span class="status-linha">—</span>;
+                } else {
+                    html += <span class="status-linha">🔒</span>;
+                }
+            }
+            html += </td>;
+            html += </tr>;
+        });
+
+        tabelaCorpo.innerHTML = html;
+
+        tabelaCorpo.querySelectorAll('.btn-editar').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const matricula = this.dataset.matricula;
+                salvarEBloquear(matricula);
+            });
+        });
+
+        if (usuarioMatricula) {
+            const policial = POLICIAIS.find(p => p.matricula === usuarioMatricula);
+            if (policial) {
+                usuarioAtual.textContent = 👤 ${policial.nome} (${policial.matricula});
+            } else {
+                usuarioAtual.textContent = '';
+            }
+        } else {
+            usuarioAtual.textContent = '';
+        }
+    }
+
+    // ================================================================
+    // 6. SALVAR E BLOQUEAR (com envio para a API)
+    // ================================================================
+    async function salvarEBloquear(matricula) {
+        if (!confirm(Tem certeza que deseja salvar e bloquear as férias para a matrícula ${matricula}?)) {
+            return;
+        }
+
+        const linha = document.querySelector(tr[data-matricula="${matricula}"]);
+        if (!linha) return;
+
+        const selects = linha.querySelectorAll('select');
+        const opcoes = [];
+        let antecipacao = '';
+        selects.forEach(sel => {
+            const opcao = sel.dataset.opcao;
+            const campo = sel.dataset.campo;
+            if (opcao !== undefined) {
+                opcoes[parseInt(opcao)] = sel.value;
+            } else if (campo === 'antecipacao') {
+                antecipacao = sel.value;
+            }
+        });
+
+        const dados = {
+            opcoes: opcoes,
+            antecipacao: antecipacao,
+            bloqueado: true
+        };
+
+        // Atualiza localmente
+        dadosLocais[matricula] = dados;
+
+        // Envia para a planilha
+        try {
+            await salvarNaAPI(matricula, dados);
+            mostrarMensagem(Férias salvas e bloqueadas para ${matricula}. Dados enviados para a planilha central., 'success');
+            // Recarrega os dados da API para sincronizar
+            await carregarDaAPI();
+        } catch (err) {
+            mostrarMensagem('Erro ao enviar para a planilha: ' + err.message + '. Dados salvos apenas localmente.', 'error');
+            // Mantém localmente
+            salvarDadosLocalmente();
+            renderizarTabela();
+        }
+    }
+
+    // ================================================================
+    // 7. FUNÇÕES DE FALLBACK LOCAL (caso a API falhe)
+    // ================================================================
+    function salvarDadosLocalmente() {
+        localStorage.setItem('feriasSOP_fallback', JSON.stringify(dadosLocais));
+    }
+
+    function carregarDadosLocais() {
+        const stored = localStorage.getItem('feriasSOP_fallback');
+        if (stored) {
+            try { dadosLocais = JSON.parse(stored); } catch(e) {}
+        }
+    }
+
+    // ================================================================
+    // 8. ADMIN: DESBLOQUEAR (também envia para API)
+    // ================================================================
+    async function desbloquearLinha(matricula) {
+        if (!dadosLocais[matricula]) {
+            adminMensagem.textContent = 'Matrícula não encontrada.';
+            adminMensagem.style.color = '#b22222';
+            return;
+        }
+        dadosLocais[matricula].bloqueado = false;
+        try {
+            await salvarNaAPI(matricula, dadosLocais[matricula]);
+            adminMensagem.textContent = Linha ${matricula} desbloqueada com sucesso!;
+            adminMensagem.style.color = '#2c7a4a';
+            await carregarDaAPI();
+        } catch (err) {
+            adminMensagem.textContent = 'Erro ao desbloquear: ' + err.message;
+            adminMensagem.style.color = '#b22222';
+            salvarDadosLocalmente();
+            renderizarTabela();
+        }
+    }
+
+    // ================================================================
+    // 9. EXPORTAR CSV
+    // ================================================================
+    function exportarCSV() {
+        let csv = 'Posto/Grad,Nome,Matrícula,Opção1,Opção2,Opção3,Opção4,Opção5,Opção6,Antecipação 13º,Bloqueado\n';
+        POLICIAIS.forEach(p => {
+            const dados = dadosLocais[p.matricula] || { opcoes: ['','','','','',''], antecipacao: '', bloqueado: false };
+            const opcoes = dados.opcoes || [];
+            while (opcoes.length < 6) opcoes.push('');
+            const linha = [
+                p.posto,
+                p.nome,
+                p.matricula,
+                ...opcoes,
+                dados.antecipacao || '',
+                dados.bloqueado ? 'Sim' : 'Não'
+            ].map(v => "${v}").join(',');
+            csv += linha + '\n';
+        });
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'ferias_sop.csv';
+        link.click();
+        URL.revokeObjectURL(link.href);
+        mostrarMensagem('CSV exportado com sucesso!', 'success');
+    }
+
+    // ================================================================
+    // 10. LIMPAR DADOS (envia para API)
+    // ================================================================
+    async function limparTodosDados() {
+        if (!confirm('Tem certeza? Isso apagará TODAS as escolhas de férias.')) return;
+        for (const p of POLICIAIS) {
+            const dados = {
+                opcoes: ['','','','','',''],
+                antecipacao: '',
+                bloqueado: false
+            };
+            dadosLocais[p.matricula] = dados;
+            await salvarNaAPI(p.matricula, dados);
+        }
+        await carregarDaAPI();
+        mostrarMensagem('Todos os dados foram limpos.', 'warning');
+    }
+
+    // ================================================================
+    // 11. MENSAGENS E AUTENTICAÇÃO ADMIN
+    // ================================================================
+    function mostrarMensagem(texto, tipo = 'info') {
+        mensagemDiv.textContent = texto;
+        mensagemDiv.className = alert ${tipo};
+        mensagemDiv.style.display = 'block';
+        setTimeout(() => {
+            mensagemDiv.style.display = 'none';
+        }, 5000);
+    }
+
+    function autenticarAdmin(senha) {
+        if (senha === SENHA_ADMIN) {
+            modoAdmin = true;
+            adminModal.style.display = 'block';
+            adminMensagem.textContent = '';
+            adminSenha.value = '';
+            return true;
+        } else {
+            adminMensagem.textContent = 'Senha incorreta.';
+            adminMensagem.style.color = '#b22222';
+            return false;
+        }
+    }
+
+    // ================================================================
+    // 12. EVENTOS
+    // ================================================================
+    function identificarUsuario() {
+        const mat = inputMatricula.value.trim();
+        if (!mat) {
+            mostrarMensagem('Digite uma matrícula.', 'error');
+            return;
+        }
+        const existe = POLICIAIS.some(p => p.matricula === mat);
+        if (!existe) {
+            mostrarMensagem('Matrícula não encontrada.', 'error');
+            usuarioMatricula = null;
+            sessionStorage.removeItem('usuarioMatriculaSOP');
+            renderizarTabela();
+            return;
+        }
+        usuarioMatricula = mat;
+        sessionStorage.setItem('usuarioMatriculaSOP', mat);
+        renderizarTabela();
+        mostrarMensagem(Identificado como matrícula ${mat}., 'success');
+        inputMatricula.value = '';
+    }
+
+    btnIdentificar.addEventListener('click', identificarUsuario);
+    inputMatricula.addEventListener('keypress', e => { if (e.key === 'Enter') identificarUsuario(); });
+
+    btnAdmin.addEventListener('click', function() {
+        if (adminModal.style.display === 'block') {
+            adminModal.style.display = 'none';
+            modoAdmin = false;
+            adminMensagem.textContent = '';
+        } else {
+            if (modoAdmin) {
+                adminModal.style.display = 'block';
+            } else {
+                const senha = prompt('Digite a senha de administrador:');
+                if (senha !== null) {
+                    if (autenticarAdmin(senha)) {
+                        adminModal.style.display = 'block';
+                    } else {
+                        alert('Senha incorreta.');
+                    }
+                }
+            }
+        }
+    });
+
+    btnFecharAdmin.addEventListener('click', function() {
+        adminModal.style.display = 'none';
+        modoAdmin = false;
+        adminMensagem.textContent = '';
+    });
+
+    btnDesbloquearExec.addEventListener('click', async function() {
+        const mat = adminMatriculaDesbloq.value.trim();
+        if (!mat) {
+            adminMensagem.textContent = 'Digite uma matrícula.';
+            adminMensagem.style.color = '#b22222';
+            return;
+        }
+        if (!modoAdmin) {
+            adminMensagem.textContent = 'Autentique-se como admin primeiro.';
+            adminMensagem.style.color = '#b22222';
+            return;
+        }
+        await desbloquearLinha(mat);
+        adminMatriculaDesbloq.value = '';
+    });
+
+    btnDesbloquear.addEventListener('click', function() {
+        btnDesbloquearExec.click();
+    });
+
+    btnExportar.addEventListener('click', exportarCSV);
+    btnExportarAdmin.addEventListener('click', exportarCSV);
+    btnLimpar.addEventListener('click', limparTodosDados);
+    btnLimparAdmin.addEventListener('click', limparTodosDados);
+
+    // ================================================================
+    // 13. INICIALIZAÇÃO
+    // ================================================================
+    // Primeiro, tenta carregar da API
+    carregarDaAPI();
+
+    // Se falhar, usa fallback local
+    carregarDadosLocais();
+
+    // Restaurar sessão
+    const sessao = sessionStorage.getItem('usuarioMatriculaSOP');
+    if (sessao) {
+        const mat = sessao;
+        const existe = POLICIAIS.some(p => p.matricula === mat);
+        if (existe) {
+            usuarioMatricula = mat;
+        }
+    }
+
+    console.log('Painel SOP/PMDF com integração com planilha central.');
+</script>
+</body>
+</html>
